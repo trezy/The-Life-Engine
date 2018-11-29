@@ -1,0 +1,13 @@
+#dish-container {
+  height: 100vh;
+  position: relative;
+  width: 100vw;
+}
+
+#dish {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}

@@ -1,0 +1,6 @@
+export * from './Base'
+export * from './Chromosome'
+export * from './Creature'
+export * from './DNA'
+export * from './Dish'
+export * from './Egg'

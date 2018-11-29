@@ -1,0 +1,17 @@
+html {
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+body {
+  font-size: 16px;
+}
+
+html,
+body,
+#__next {
+  margin: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+  padding: 0;
+}

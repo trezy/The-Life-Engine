@@ -1,0 +1,7 @@
+.DS_Store
+yarn-error.log
+.next/
+bower_components/
+node_modules/
+static/compiled/
+logs/

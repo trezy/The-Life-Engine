@@ -1,0 +1,29 @@
+{
+  "name": "life-engine",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.1.6",
+    "@zeit/next-sass": "^1.0.1",
+    "classnames": "^2.2.6",
+    "next": "^7.0.2",
+    "next-redux-wrapper": "^2.0.0",
+    "node-sass": "^4.10.0",
+    "prop-types": "^15.6.2",
+    "rafael": "^4.3.1",
+    "react": "^16.7.0-alpha.2",
+    "react-clickdrag": "^4.0.0",
+    "react-dom": "^16.7.0-alpha.2",
+    "react-redux": "^5.1.1",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.7",
+    "redux-thunk": "^2.3.0",
+    "uuid": "^3.3.2"
+  }
+}
