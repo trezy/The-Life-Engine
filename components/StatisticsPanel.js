@@ -30,47 +30,80 @@ class StatisticsPanel extends React.Component {
 
   render () {
     const {
-      creatures,
-      eggs,
+      creaturesAlive,
+      creaturesDead,
+      eggsAlive,
+      eggsDead,
+      eggsHatched,
     } = this.props.statistics
 
     return (
-      <div id="statistics-panel">
-        <table>
-          <tbody>
-            <tr>
-              <th />
+      <div
+        className="container with-title"
+        id="statistics-panel">
+        <h2 className="title">
+          Statistics
+        </h2>
 
-              <th>Eggs</th>
+        <div className="container with-title">
+          <h3 className="title">
+            Eggs
+          </h3>
 
-              <th>Creatures</th>
-            </tr>
+          <table className="table is-bordered">
+            <thead>
+              <tr>
+                <th>Alive</th>
 
-            <tr>
-              <th>Alive</th>
+                <th>Hatch'd</th>
 
-              <td>{eggs.alive}</td>
+                <th>Dead</th>
 
-              <td>{creatures.alive}</td>
-            </tr>
+                <th>Total</th>
+              </tr>
+            </thead>
 
-            <tr>
-              <th>Dead</th>
+            <tbody>
+              <tr>
+                <td>{eggsAlive}</td>
 
-              <td>{eggs.dead}</td>
+                <td>{eggsHatched}</td>
 
-              <td>{creatures.dead}</td>
-            </tr>
+                <td>{eggsDead}</td>
 
-            <tr>
-              <th>Total</th>
+                <td>{eggsAlive + eggsHatched + eggsDead}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-              <td>{eggs.alive + eggs.dead}</td>
+        <div className="container with-title">
+          <h3 className="title">
+            Creatures
+          </h3>
 
-              <td>{creatures.alive + creatures.dead}</td>
-            </tr>
-          </tbody>
-        </table>
+          <table className="table is-bordered">
+            <thead>
+              <tr>
+                <th>Alive</th>
+
+                <th>Dead</th>
+
+                <th>Total</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>{creaturesAlive}</td>
+
+                <td>{creaturesDead}</td>
+
+                <td>{creaturesAlive + creaturesDead}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }

@@ -24,11 +24,15 @@ export default function simulationReducer (state = initialState.simulation, acti
       break
 
     case actionTypes.ZOOM_IN:
-      newState.zoom = state.zoom + 0.25
+      newState.zoom = state.zoom + 0.10
+      newState.canZoomOut = true
       break
 
     case actionTypes.ZOOM_OUT:
-      newState.zoom = state.zoom - 0.25
+      newState.zoom = state.zoom - 0.10
+      if (state.zoom <= 0.3) {
+        newState.canZoomOut = false
+      }
       break
 
     default:

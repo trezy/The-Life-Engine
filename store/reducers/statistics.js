@@ -1,9 +1,5 @@
 import actionTypes from '../actionTypes'
 import initialState from '../initialState'
-import {
-  Creature,
-  Egg,
-} from '../../modules'
 
 
 
@@ -19,17 +15,18 @@ export default function statisticsReducer (state = initialState.statistics, acti
 
   switch (type) {
     case actionTypes.HATCH_EGG:
-      newState.creatures.alive = newState.creatures.alive + 1
-      newState.eggs.hatched = newState.eggs.hatched + 1
+      newState.creaturesAlive = newState.creaturesAlive + 1
+      newState.eggsAlive = newState.eggsAlive - 1
+      newState.eggsHatched = newState.eggsHatched + 1
       break
 
     case actionTypes.KILL_EGG:
-      newState.eggs.alive = newState.eggs.alive - 1
-      newState.eggs.dead = newState.eggs.dead + 1
+      newState.eggsAlive = newState.eggsAlive - 1
+      newState.eggsDead = newState.eggsDead + 1
       break
 
     case actionTypes.START_SIMULATION:
-      newState.eggs.alive = payload.eggsToSpawn
+      newState.eggsAlive = payload.eggsToSpawn
       break
 
     case actionTypes.STOP_SIMULATION:

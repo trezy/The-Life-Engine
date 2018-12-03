@@ -8,20 +8,17 @@ const initialState = {
       height: 0,
       width: 0,
     },
+    canZoomOut: true,
     eggsToSpawn: 100,
     running: false,
     zoom: 1,
   },
   statistics: {
-    eggs: {
-      alive: 0,
-      dead: 0,
-      hatched: 0,
-    },
-    creatures: {
-      alive: 0,
-      dead: 0,
-    }
+    eggsAlive: 0,
+    eggsDead: 0,
+    eggsHatched: 0,
+    creaturesAlive: 0,
+    creaturesDead: 0,
   }
 }
 
