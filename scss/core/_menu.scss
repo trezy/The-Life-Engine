@@ -1,0 +1,19 @@
+menu {
+  display: flex;
+  margin: 0;
+  padding: 0;
+
+  .primary,
+  .secondary {
+    flex-shrink: 1;
+  }
+
+  .primary {
+    margin-left: auto;
+    order: 2;
+  }
+
+  .secondary {
+    order: 1;
+  }
+}

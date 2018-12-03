@@ -40,15 +40,15 @@ class Home extends React.Component {
 
     return (
       <React.Fragment>
+        <Dish
+          eggsToSpawn={simulation.eggsToSpawn}
+          running={simulation.running} />
+
         <ControlPanel />
 
         {simulation.running && (
           <StatisticsPanel />
         )}
-
-        <Dish
-          eggsToSpawn={simulation.eggsToSpawn}
-          running={simulation.running} />
       </React.Fragment>
     )
   }

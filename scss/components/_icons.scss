@@ -1,0 +1,16 @@
+.sixteen-bit-icon {
+  height: 16px;
+  width: 16px;
+
+  &.small {
+    transform: scale(1);
+  }
+
+  &.medium {
+    transform: scale(1.5);
+  }
+
+  &.large {
+    transform: scale(2);
+  }
+}
