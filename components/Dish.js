@@ -89,8 +89,8 @@ class Dish extends React.Component {
       const currentX = lastX + nextProps.dataDrag.moveDeltaX
       const currentY = lastY + nextProps.dataDrag.moveDeltaY
       const newState = {}
-      const overdrawGutterX = simulation.bounds.width * 0.5
-      const overdrawGutterY = simulation.bounds.height * 0.5
+      const overdrawGutterX = simulation.bounds.width / 2
+      const overdrawGutterY = simulation.bounds.height / 2
 
       const canDragEast = currentX < overdrawGutterX
       const canDragNorth = currentY < overdrawGutterY
