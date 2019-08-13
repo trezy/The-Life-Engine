@@ -11,6 +11,10 @@ const initialState = {
     canZoomOut: true,
     dishSize: 500,
     eggsToSpawn: 100,
+    offset: {
+      x: 0,
+      y: 0,
+    },
     running: false,
     zoom: 1,
   },

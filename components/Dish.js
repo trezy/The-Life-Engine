@@ -114,20 +114,10 @@ class Dish extends React.Component {
           height={simulation.bounds.height}
           // viewBox={viewBox.join(' ')}
           width={simulation.bounds.width}>
-          <circle
-            cx={simulation.bounds.width / 2}
-            cy={simulation.bounds.height / 2}
-            id="dish-boundary"
-            r={simulation.dishSize / 2}
-            transform={[
-              `scale(${simulation.zoom})`,
-              `translate(${currentX} ${currentY})`,
-            ].join(' ')} />
-
           <g
             transform={[
+              `translate(${currentX + simulation.offset.x} ${currentY + simulation.offset.y})`,
               `scale(${simulation.zoom})`,
-              `translate(${currentX} ${currentY})`,
             ].join(' ')}>
             {simulation.running && (
               <React.Fragment>
@@ -148,6 +138,12 @@ class Dish extends React.Component {
                 </g>
               </React.Fragment>
             )}
+
+            <circle
+              cx={simulation.bounds.width / 2}
+              cy={simulation.bounds.height / 2}
+              id="dish-boundary"
+              r={simulation.dishSize / 2} />
           </g>
         </svg>
       </div>
