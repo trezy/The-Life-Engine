@@ -92,10 +92,10 @@ class Dish extends React.Component {
       const overdrawGutterX = simulation.bounds.width * 0.5
       const overdrawGutterY = simulation.bounds.height * 0.5
 
-      let canDragEast = currentX < overdrawGutterX
-      let canDragNorth = currentY < overdrawGutterY
-      let canDragSouth = currentY > -overdrawGutterY
-      let canDragWest = currentX > -overdrawGutterX
+      const canDragEast = currentX < overdrawGutterX
+      const canDragNorth = currentY < overdrawGutterY
+      const canDragSouth = currentY > -overdrawGutterY
+      const canDragWest = currentX > -overdrawGutterX
 
       const canDragHorizontally = canDragEast && canDragWest
       const canDragVertically = canDragNorth && canDragSouth
