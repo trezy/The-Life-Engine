@@ -77,18 +77,48 @@ class Dish extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { simulation } = this.props
     const {
-      lastX,
-      lastY,
       currentX,
       currentY,
+      lastX,
+      lastY,
     } = this.state
 
     if (nextProps.dataDrag.isMoving) {
-      this.setState({
-        currentX: lastX + nextProps.dataDrag.moveDeltaX,
-        currentY: lastY + nextProps.dataDrag.moveDeltaY,
-      })
+      const currentX = lastX + nextProps.dataDrag.moveDeltaX
+      const currentY = lastY + nextProps.dataDrag.moveDeltaY
+      const newState = {}
+      const overdrawGutterX = simulation.bounds.width * 0.5
+      const overdrawGutterY = simulation.bounds.height * 0.5
+
+      let canDragEast = currentX < overdrawGutterX
+      let canDragNorth = currentY < overdrawGutterY
+      let canDragSouth = currentY > -overdrawGutterY
+      let canDragWest = currentX > -overdrawGutterX
+
+      const canDragHorizontally = canDragEast && canDragWest
+      const canDragVertically = canDragNorth && canDragSouth
+
+      if (canDragHorizontally) {
+        newState.currentX = currentX
+      } else if (canDragEast && (newState.currentX !== -overdrawGutterX)) {
+        newState.currentX = -overdrawGutterX
+      } else if (canDragWest && (newState.currentX !== overdrawGutterX)) {
+        newState.currentX = overdrawGutterX
+      }
+
+      if (canDragVertically) {
+        newState.currentY = currentY
+      } else if (canDragNorth && (newState.currentY !== -overdrawGutterY)) {
+        newState.currentY = -overdrawGutterY
+      } else if (canDragSouth && (newState.currentY !== overdrawGutterY)) {
+        newState.currentY = overdrawGutterY
+      }
+
+      if (Object.keys(newState).length) {
+        this.setState(newState)
+      }
     } else {
       this.setState({
         lastX: currentX,
