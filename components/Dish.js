@@ -12,6 +12,7 @@ import {
   CreatureRenderer,
   EggRenderer,
 } from '.'
+import isClient from '../helpers/isClient'
 
 
 
@@ -23,6 +24,10 @@ class Dish extends React.Component {
   /***************************************************************************\
     Local Properties
   \***************************************************************************/
+
+  static mapDispatchToProps = [
+    'updateBounds',
+  ]
 
   static mapStateToProps = ({ entities, simulation }) => ({ entities, simulation })
 
@@ -38,8 +43,38 @@ class Dish extends React.Component {
 
 
   /***************************************************************************\
+    Private Methods
+  \***************************************************************************/
+
+  _bindEvents () {
+    const { updateBounds } = this.props
+
+    window.addEventListener('resize', this._updateBounds)
+  }
+
+  _updateBounds = () => {
+    const { updateBounds } = this.props
+
+    updateBounds({
+      height: window.innerHeight,
+      width: window.innerWidth,
+    })
+  }
+
+
+
+
+
+  /***************************************************************************\
     Public Methods
   \***************************************************************************/
+
+  componentDidMount () {
+    if (isClient()) {
+      this._updateBounds()
+      this._bindEvents()
+    }
+  }
 
   componentWillReceiveProps(nextProps) {
     const {
@@ -79,6 +114,16 @@ class Dish extends React.Component {
           height={simulation.bounds.height}
           // viewBox={viewBox.join(' ')}
           width={simulation.bounds.width}>
+          <circle
+            cx={simulation.bounds.width / 2}
+            cy={simulation.bounds.height / 2}
+            id="dish-boundary"
+            r={simulation.dishSize / 2}
+            transform={[
+              `scale(${simulation.zoom})`,
+              `translate(${currentX} ${currentY})`,
+            ].join(' ')} />
+
           <g
             transform={[
               `scale(${simulation.zoom})`,

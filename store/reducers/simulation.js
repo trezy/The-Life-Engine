@@ -15,12 +15,23 @@ export default function simulationReducer (state = initialState.simulation, acti
 
   switch (type) {
     case actionTypes.START_SIMULATION:
-      newState.bounds = payload.bounds
       newState.running = true
       break
 
     case actionTypes.STOP_SIMULATION:
       newState.running = false
+      break
+
+    case actionTypes.UPDATE_BOUNDS:
+      newState.bounds = payload.bounds
+      break
+
+    case actionTypes.UPDATE_DISH_SIZE:
+      newState.dishSize = payload.size
+      break
+
+    case actionTypes.UPDATE_EGGS_TO_SPAWN:
+      newState.eggsToSpawn = payload.eggsToSpawn
       break
 
     case actionTypes.ZOOM_IN:

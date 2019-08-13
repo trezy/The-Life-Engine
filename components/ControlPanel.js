@@ -25,16 +25,22 @@ class ControlPanel extends React.Component {
   static mapDispatchToProps = [
     'startSimulation',
     'stopSimulation',
+    'updateDishSize',
+    'updateEggsToSpawn',
     'zoomIn',
     'zoomOut',
   ]
 
-  state = {
-    bounds: {
-      height: isClient() ? window.innerHeight : 500,
-      width: isClient() ? window.innerWidth : 500,
-    },
-    eggsToSpawn: 100,
+  _handleDishSizeChange = ({ target: { value }}) => {
+    const { updateDishSize } = this.props
+
+    updateDishSize(value)
+  }
+
+  _handleEggCountChange ({ target: { value }}) {
+    const { updateEggsToSpawn } = this.props
+    
+    updateEggsToSpawn(parseInt(value))
   }
 
   _handleSubmit = event => {
@@ -43,17 +49,13 @@ class ControlPanel extends React.Component {
       startSimulation,
       stopSimulation,
     } = this.props
-    const {
-      bounds,
-      eggsToSpawn,
-    } = this.state
 
     event.preventDefault()
 
     if (simulation.running) {
       stopSimulation()
     } else {
-      startSimulation(eggsToSpawn, bounds)
+      startSimulation()
     }
   }
 
@@ -65,16 +67,20 @@ class ControlPanel extends React.Component {
     Public Methods
   \***************************************************************************/
 
+  componentDidMount () {
+    const { updateDishSize } = this.props
+
+    if (isClient()) {
+      updateDishSize(Math.round(Math.min(window.innerHeight, window.innerWidth) / 2))
+    }
+  }
+
   render () {
     const {
       simulation,
       zoomIn,
       zoomOut,
     } = this.props
-    const {
-      bounds,
-      eggsToSpawn,
-    } = this.state
 
     return (
       <form
@@ -87,39 +93,16 @@ class ControlPanel extends React.Component {
           </h3>
 
           <div className="field is-inline">
-            <label htmlFor="simulation-width">Width</label>
+            <label htmlFor="simulation-dish-size">Dish Size</label>
 
             <input
               className="input"
               disabled={simulation.running}
-              id="simulation-width"
-              name="simulation-width"
-              onChange={({ target: { value }}) => this.setState({
-                bounds: {
-                  ...bounds,
-                  width: parseInt(value) || 0,
-                }
-              })}
+              id="simulation-dish-size"
+              name="simulation-dish-size"
+              onChange={this._handleDishSizeChange}
               type="number"
-              value={bounds.width} />
-          </div>
-
-          <div className="field is-inline">
-            <label htmlFor="simulation-height">Height</label>
-
-            <input
-              className="input"
-              disabled={simulation.running}
-              id="simulation-height"
-              name="simulation-height"
-              onChange={({ target: { value }}) => this.setState({
-                bounds: {
-                  ...bounds,
-                  height: parseInt(value) || 0,
-                }
-              })}
-              type="number"
-              value={bounds.height} />
+              value={simulation.dishSize} />
           </div>
         </div>
 
@@ -135,11 +118,11 @@ class ControlPanel extends React.Component {
               max="1000"
               min="10"
               name="egg-count"
-              onChange={({ target: { value }}) => this.setState({ eggsToSpawn: parseInt(value)})}
+              onChange={this._handleEggCountChange}
               step="10"
               type="range"
-              value={eggsToSpawn} />
-            <span>{eggsToSpawn}</span>
+              value={simulation.eggsToSpawn} />
+            <span>{simulation.eggsToSpawn}</span>
           </div>
         </div>
 

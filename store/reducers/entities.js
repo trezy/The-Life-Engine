@@ -27,19 +27,28 @@ export default function entitiesReducer (state = initialState.entities, action) 
       newState.creatures.push(creature)
       break
 
-    // case actionTypes.KILL_EGG:
-    //   break
-
     case actionTypes.START_SIMULATION:
+      const { 
+        bounds,
+        dishSize,
+      } = payload
+
+      const center = {
+        x: bounds.width / 2,
+        y: bounds.height / 2,
+      }
+
       newState.eggs = []
 
       while (newState.eggs.length < payload.eggsToSpawn) {
-        const { bounds } = payload
         const egg = new Egg
 
+        const a = Math.random() * 2 * Math.PI
+        const r = ((dishSize / 2) - egg.phenotype.size) * Math.sqrt(Math.random())
+
         egg.data.position = {
-          x: (Math.random() * (bounds.width - egg.phenotype.size)) + (egg.phenotype.size / 2),
-          y: (Math.random() * (bounds.height - egg.phenotype.size)) + (egg.phenotype.size / 2),
+          x: (r * Math.cos(a)) + (egg.phenotype.size / 2) + center.x,
+          y: (r * Math.sin(a)) + (egg.phenotype.size / 2) + center.y,
         }
 
         newState.eggs.push(egg)

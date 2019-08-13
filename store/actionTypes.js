@@ -3,6 +3,8 @@ const actionTypes = [
   'KILL_EGG',
   'START_SIMULATION',
   'STOP_SIMULATION',
+  'UPDATE_BOUNDS',
+  'UPDATE_DISH_SIZE',
   'UPDATE_EGGS_TO_SPAWN',
   'ZOOM_IN',
   'ZOOM_OUT',
